@@ -281,8 +281,6 @@ public:
 
     Sigmatron(int x, int y, int health_points, GameWorld *game_world, int _speed);
 
-    virtual void Update() override;
-
     virtual void TryAttack() override;
 };
 
@@ -292,8 +290,6 @@ class Omegatron: public SpaceShip {
 public:
 
     Omegatron(int x, int y, int health_points, GameWorld *game_world, int damage, int _speed);
-
-    virtual void Update() override;
 
     virtual void TryAttack() override;
 };
