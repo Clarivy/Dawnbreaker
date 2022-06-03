@@ -21,23 +21,24 @@ public:
 
     virtual ~GameObject();
 
-protected:
-
     bool IsDestroyed() const;
 
-    virtual bool IsEnemy() const;
+    int GetHealthPoints() const;
+
+    virtual int IsEnemy() const;
 
     virtual bool IsAlliance() const;
 
     virtual int IsGoodie() const;
 
-    virtual int CheckCollision() const;
-
-    int GetHealthPoints() const;
-
     void SetHealthPoints(int new_health_points);
 
     void SetDestroyed();
+
+protected:
+
+    virtual int CheckCollision() const;
+
 
 private:
     
@@ -47,6 +48,8 @@ private:
 
 
 class Star : public GameObject {
+
+public:
 
     Star(int x, int y, double size);
 
@@ -107,7 +110,7 @@ public:
 
     using PhysicalObject::PhysicalObject;
 
-    virtual bool IsEnemy() const override;
+    virtual int IsEnemy() const override;
 
 };
 
@@ -195,6 +198,8 @@ protected:
     void Move();
 
     virtual void TryAttack() = 0;
+
+    virtual int IsEnemy() const override;
 
     void EngeryRegeneration();
 

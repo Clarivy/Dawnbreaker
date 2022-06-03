@@ -32,7 +32,7 @@ bool GameObject::IsDestroyed() const {
     return health_points == 0;
 }
 
-bool GameObject::IsEnemy() const {
+int GameObject::IsEnemy() const {
     return false;
 }
 
@@ -56,7 +56,18 @@ void GameObject::SetDestroyed() {
     health_points = 0;
 }
 
-Star::Star(int x, int y, double size) : GameObject(IMGID_STAR, x, y, 0, 4, size, 1) {
+Star::Star(int x, int y, double size) : GameObject(IMGID_STAR, 0, 0, 0, 4, 0.1, 1) {
+    if (x == -1) {
+        x = randInt(0, WINDOW_WIDTH - 1);
+    }
+    if (y == -1) {
+        y = randInt(0, WINDOW_HEIGHT - 1);
+    }
+    if (size < 0) {
+        size = randInt(10, 40) / 100.0;
+    }
+    MoveTo(x, y);
+    SetSize(size);
 }
 
 void Star::Update() {
@@ -106,11 +117,11 @@ int Goodie::GetReward() const {
     return 20;
 }
 
-bool Enemy::IsEnemy() const {
+int Enemy::IsEnemy() const {
     return true;
 }
 
-Dawnbreaker::Dawnbreaker(GameWorld * game_world) : Alliance(IMGID_DAWNBREAKER, 300, 300, 0, 0, 1.0, 100, game_world, 0) {
+Dawnbreaker::Dawnbreaker(GameWorld * game_world) : Alliance(IMGID_DAWNBREAKER, 300, 100, 0, 0, 1.0, 100, game_world, 0) {
     lives = 3;
     meteors_number = 0;
     level = 0;
@@ -201,9 +212,21 @@ void RedBullet::Update() {
 }
 
 SpaceShip::SpaceShip(int imageID, int x, int y, int health_points, GameWorld *game_world, int damage, int _energy, int _speed, int _energy_limit) : Enemy (imageID, x, y, 180, 0, 1.0, health_points, game_world, damage) {
+    if (x == -1) {
+        x = randInt(0, WINDOW_WIDTH - 1);
+    }
+    if (y == -1) {
+        y = randInt(0, WINDOW_HEIGHT - 1);
+    }
+    MoveTo(x, y);
+
     energy = _energy;
     energy_limit = _energy_limit;
     speed = _speed;
+}
+
+int SpaceShip::IsEnemy() const {
+    return 2;
 }
 
 void SpaceShip::EngeryRegeneration() {
