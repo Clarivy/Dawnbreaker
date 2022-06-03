@@ -72,6 +72,7 @@
 ### PhysicalObject: GameObject
 
 * game_world: GameWorld*
+* dagame
 
 
 
@@ -84,14 +85,13 @@
 
 ### Goodie: PhysicalObject
 
-* reward = 20
+* GetReward()->int
 
 
 
 ### Enemy: PhysicalObject
 
 * override-CheckCollision
-* damage
 * override: IsEnemy
 
 
@@ -118,21 +118,33 @@
 
 ### SpaceShip: Enemy
 
+* Getter and setter for following variables
 * energy: int
+* strategy: int
+* strategy_length: int
+* speed: int
+
+
+
+### HPRestoreGoodie: Goodie
+
+* override-IsGoodie()->int:
+
+* return 1
 
 
 
 ### PowerUpGoodie: Goodie
 
 * override-IsGoodie()->int:
-  * return 1
+  * return 2
 
 
 
 ### MeteorGoodie: Goodie
 
 * override-IsGoodie()->int:
-  * return 2
+  * return 3
 
 
 
