@@ -7,6 +7,12 @@
 
 #include "ObjectBase.h"
 
+enum class StrategyDirection {
+    STRAIGHT,
+    LEFTDOWN,
+    RIGHTDOWN
+};
+
 class GameObject : public ObjectBase {
 
 public:
@@ -27,17 +33,22 @@ protected:
 
     virtual int CheckCollision() const;
 
-    int health_points;
+    int GetHealthPoints() const;
+
+    void SetHealthPoints(int new_health_points);
+
+    void SetDestroyed();
 
 private:
     
+    int health_points;
 
 };
 
 
 class Star : public GameObject {
 
-    Star(int x, int y, int size);
+    Star(int x, int y, double size);
 
     virtual void Update() override;
 
@@ -53,18 +64,26 @@ class Explosion : public GameObject {
 
 class PhysicalObject : public GameObject {
 
+public:
+
     PhysicalObject(int imageID, int x, int y, int direction, int layer, double size, int health, GameWorld *_game_world, int _damage);
+
+    virtual bool CollisionCheck() = 0;
+
+    int GetDamage() const;
 
 protected:
 
     GameWorld* game_world;
-    int dagame;
+    int damage;
 
 };
 
 class Alliance: public PhysicalObject {
 
-    Alliance(int imageID, int x, int y, int direction, int layer, double size, int health, GameWorld *_game_world, int _damage);
+public:
+
+    using PhysicalObject::PhysicalObject;
 
     virtual bool IsAlliance() const override;
 
@@ -72,17 +91,21 @@ class Alliance: public PhysicalObject {
 
 class Goodie: public PhysicalObject {
 
-    Goodie(int imageID, int x, int y, GameWorld *_game_world);
+public:
 
-    virtual int IsGoodie() const;
+    Goodie(int imageID, int x, int y, GameWorld *game_world);
 
-    void GetReward() const;
+    virtual void Update() override;
+
+    int GetReward() const;
 
 };
 
 class Enemy: public PhysicalObject {
 
-    Enemy(int imageID, int x, int y, int direction, int layer, double size, int health, GameWorld *_game_world, int _damage);
+public:
+
+    using PhysicalObject::PhysicalObject;
 
     virtual bool IsEnemy() const override;
 
@@ -92,23 +115,46 @@ class Dawnbreaker: public Alliance {
 
 public:
 
-    Dawnbreaker();
+    Dawnbreaker(GameWorld *game_world);
 
     virtual void Update() override;
 
-protected:
+    virtual bool CollisionCheck() override;
+
+    int GetLives() const;
+
+    int GetMeteorsNumber() const;
+
+    int GetLevel() const;
+
+    int GetDestroyedEnemy() const;
+
+    void IncreaseEnergy();
+
+    void IncreaseMeteorsNumber();
+
+    void IncreaseLevel();
+
+    void DecreaseLives();
+
+    void IncreaseDestroyedEnemy();
+
+private:
 
     int lives;
     int meteors_number;
     int level;
-
+    int energy;
+    int destroyed_enemy;
 };
 
 class BlueBullet: public Alliance {
     
 public:
 
-    BlueBullet(int x, int y, int size, GameWorld *_game_world, int _damage);
+    BlueBullet(int x, int y, double size, GameWorld *game_world, int damage);
+
+    virtual bool CollisionCheck() override;
 
     virtual void Update() override;
 
@@ -118,9 +164,11 @@ class Meteor: public Alliance {
 
 public:
 
-    Meteor(int x, int y, GameWorld *_game_world, int _damage);
+    Meteor(int x, int y, GameWorld *game_world);
 
     virtual void Update() override;
+
+    virtual bool CollisionCheck() override;
 
 };
 
@@ -128,7 +176,9 @@ class RedBullet: public Enemy {
 
 public:
 
-    RedBullet(int x, int y, int direction, GameWorld *_game_world, int _damage);
+    RedBullet(int x, int y, int direction, GameWorld *game_world, int damage);
+
+    virtual bool CollisionCheck() override;
 
     virtual void Update() override;
 
@@ -138,30 +188,42 @@ class SpaceShip: public Enemy {
 
 public:
 
-    SpaceShip(int imageID, int x, int y, int health_points, GameWorld *_game_world, int _damage, int _energy, int _speed);
+    SpaceShip(int imageID, int x, int y, int health_points, GameWorld *game_world, int damage, int _energy, int _speed, int _energy_limit);
 
 protected:
 
+    void Move();
+
+    virtual void TryAttack() = 0;
+
+    void EngeryRegeneration();
+
+    virtual bool CollisionCheck() override;
+
+    virtual void Update() override;
+
     int GetEnergy() const;
 
-    int GetStategy() const;
+    StrategyDirection GetStrategy() const;
 
-    int GetStategyLength() const;
+    int GetStrategyLength() const;
 
     int GetSpeed() const;
 
-    int SetEnergy() const;
+    void SetEnergy(int x);
+
+    void SetStrategy(int x);
  
-    int SetStategy() const;
+    void SetStrategy(StrategyDirection x);
  
-    int SetStategyLength() const;
+    void SetStrategyLength(int x);
  
-    int SetSpeed() const;
+    void SetSpeed(int x);
 
 private:
 
-    int energy;
-    int strategy;
+    int energy, energy_limit;
+    StrategyDirection strategy;
     int strategy_length;
     int speed;
 
@@ -171,9 +233,9 @@ class HPRestoreGoodie: public Goodie {
 
 public:
 
-    HPRestoreGoodie(int x, int y, GameWorld *_game_world);
+    HPRestoreGoodie(int x, int y, GameWorld *game_world);
 
-    virtual void Update() override;
+    virtual bool CollisionCheck() override;
 
     virtual int IsGoodie() const override;
 
@@ -183,9 +245,9 @@ class PowerUpGoodie: public Goodie {
 
 public:
 
-    PowerUpGoodie(int x, int y, GameWorld *_game_world);
+    PowerUpGoodie(int x, int y, GameWorld *game_world);
 
-    virtual void Update() override;
+    virtual bool CollisionCheck() override;
 
     virtual int IsGoodie() const override;
 
@@ -195,9 +257,9 @@ class MeteorGoodie: public Goodie {
 
 public:
 
-    MeteorGoodie(int x, int y, GameWorld *_game_world);
+    MeteorGoodie(int x, int y, GameWorld *game_world);
 
-    virtual void Update() override;
+    virtual bool CollisionCheck() override;
 
     virtual int IsGoodie() const override;
 
@@ -207,9 +269,9 @@ class Alphatron: public SpaceShip {
 
 public:
 
-    Alphatron(int x, int y, int health_points, GameWorld *_game_world, int _damage, int _speed);
+    Alphatron(int x, int y, int health_points, GameWorld *game_world, int damage, int _speed);
 
-    virtual void Update() override;
+    virtual void TryAttack() override;
 
 };
 
@@ -217,10 +279,11 @@ class Sigmatron: public SpaceShip {
 
 public:
 
-    Sigmatron(int x, int y, int health_points, GameWorld *_game_world, int _speed);
+    Sigmatron(int x, int y, int health_points, GameWorld *game_world, int _speed);
 
     virtual void Update() override;
 
+    virtual void TryAttack() override;
 };
 
 
@@ -228,10 +291,11 @@ class Omegatron: public SpaceShip {
 
 public:
 
-    Omegatron(int x, int y, int health_points, GameWorld *_game_world, int _damage, int _speed);
+    Omegatron(int x, int y, int health_points, GameWorld *game_world, int damage, int _speed);
 
     virtual void Update() override;
 
+    virtual void TryAttack() override;
 };
 
 #endif // GAMEOBJECTS_H__
