@@ -529,12 +529,11 @@ void Omegatron::DeathEvent() {
 
     int R = randInt(1, 100);
     Goodie* new_goodie;
-    if (R <= 40) {
-        new_goodie = new HPRestoreGoodie(GetX(), GetY(), game_world);
-    }
-    else {
+    if (R <= 80) {
         new_goodie = new PowerUpGoodie(GetX(), GetY(), game_world);
     }
+    else {
+        new_goodie = new MeteorGoodie(GetX(), GetY(), game_world);
+    }
     game_world->game_objects.push_back(new_goodie);
-
 }
