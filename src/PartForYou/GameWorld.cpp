@@ -1,8 +1,11 @@
 #include "GameWorld.h"
 #include "GameObjects.h"
 #include "utils.h"
+#include <sstream>
 
 GameWorld::GameWorld() {
+    current_enemy_num = 0;
+    lives = 3;
 }
 
 GameWorld::~GameWorld() {
@@ -60,13 +63,14 @@ LevelStatus GameWorld::Update() {
 #undef level
 
     // Update all objects
+    player->Update();
     for (auto it = game_objects.begin(); it != game_objects.end(); ++it) {
         GameObject *obj = *it;
         obj->Update();
     }
 
     if (player->IsDestroyed()) {
-        player->DecreaseLives();
+        DecreaseLives();
         return LevelStatus::DAWNBREAKER_DESTROYED;
     }
 
@@ -86,7 +90,9 @@ LevelStatus GameWorld::Update() {
         }
     }
     // HP: X/100 Meteors: X Lives: X Level: X Enemies: X/X Score: X
-    std::cout << "HP: " << player->GetHealthPoints() << "/100   Meteors: " << player->GetMeteorsNumber() << "   Lives: " << player->GetLives() << "   Level: " << GetLevel() << "   Enemies: " << player->GetDestroyedEnemy() << "/" << required << "   Score: " << GetScore() << std::endl;
+    std::ostringstream os;
+    os << "HP: " << player->GetHealthPoints() << "/100   Meteors: " << player->GetMeteorsNumber() << "   Lives: " << GetLives() << "   Level: " << GetLevel() << "   Enemies: " << player->GetDestroyedEnemy() << "/" << required << "   Score: " << GetScore();
+    SetStatusBarMessage(os.str());
     return LevelStatus::ONGOING;
 }
 
@@ -94,9 +100,23 @@ void GameWorld::CleanUp() {
     for (auto game_object : game_objects) {
         delete game_object;
     }
+    delete player;
     game_objects.clear();
+    current_enemy_num = 0;
 }
 
 bool GameWorld::IsGameOver() const {
-    return player->GetLives() <= 0;
+    return GetLives() <= 0;
+}
+
+void GameWorld::DecreaseCurrentEnemyNum() {
+    --current_enemy_num;
+}
+
+int GameWorld::GetLives() const {
+    return lives;
+}
+
+void GameWorld::DecreaseLives() {
+    --lives;
 }

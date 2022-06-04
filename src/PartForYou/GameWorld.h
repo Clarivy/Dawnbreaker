@@ -37,13 +37,21 @@ public:
 
     virtual bool IsGameOver() const override;
 
+    int GetLives() const;
+
+    void DecreaseLives();
+
     std::list<GameObject *> game_objects;
 
     Dawnbreaker *player;
 
+    void DecreaseCurrentEnemyNum();
+
 private:
 
-    int current_enemy_num;
+    int current_enemy_num = 0;
+
+    int lives = 3;
 
 };
 

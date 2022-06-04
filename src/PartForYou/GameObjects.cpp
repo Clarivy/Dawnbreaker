@@ -3,7 +3,16 @@
 
 #define Y_EXCEED_DESTROY { \
     if (GetY() < 0 || GetY() >= WINDOW_HEIGHT) {\
-        return SetDestroyed();\
+        SetDestroyed();\
+        return; \
+    }\
+}
+
+#define SPACESHIP_EXCEED_DESTROY { \
+    if (GetY() < 0 || GetY() >= WINDOW_HEIGHT) {\
+        SetDestroyed();\
+        game_world->DecreaseCurrentEnemyNum();\
+        return; \
     }\
 }
 
@@ -31,7 +40,7 @@ double GameObject::operator ^ (const GameObject &other) const {
 }
 
 bool GameObject::IsDestroyed() const {
-    return health_points == 0;
+    return health_points <= 0;
 }
 
 int GameObject::IsEnemy() const {
@@ -124,10 +133,10 @@ bool Goodie::CheckCollision() {
 }
 
 Dawnbreaker::Dawnbreaker(GameWorld * game_world) : PhysicalObject(IMGID_DAWNBREAKER, 300, 100, 0, 0, 1.0, 100, game_world, 0) {
-    lives = 3;
     meteors_number = 0;
     level = 0;
     energy = 10;
+    destroyed_enemy = 0;
 }
 
 #define TRY_MOVE(DIR, a, b) { \
@@ -166,10 +175,6 @@ void Dawnbreaker::Update() {
 
 #undef TRY_MOVE
 
-int Dawnbreaker::GetLives() const {
-    return lives;
-}
-
 int Dawnbreaker::GetMeteorsNumber() const {
     return meteors_number;
 }
@@ -196,16 +201,13 @@ void Dawnbreaker::IncreaseLevel() {
     ++level;
 }
 
-void Dawnbreaker::DecreaseLives() {
-    --lives;
-}
-
 void Dawnbreaker::IncreaseDestroyedEnemy() {
     ++destroyed_enemy;
 }
 
 bool Alliance::CheckCollision() {
     for (auto &object : game_world->game_objects) {
+        if (object->IsDestroyed()) continue;
         if (object->IsEnemy() == 2) {
             double distance = (*this) ^ (*object);
             if(distance > 0) {
@@ -301,6 +303,8 @@ SpaceShip::SpaceShip(int imageID, int x, int y, int health_points, GameWorld *ga
     energy = _energy;
     energy_limit = _energy_limit;
     speed = _speed;
+    strategy = StrategyDirection::STRAIGHT;
+    strategy_length = 0;
 }
 
 void SpaceShip::EngeryRegeneration() {
@@ -315,9 +319,11 @@ bool SpaceShip::CheckCollision() {
     if(distance > 0) {
         player->SetHealthPoints(player->GetHealthPoints() - 20);
         this->SetDestroyed();
+        DeathEvent();
         return true;
     }
     for (auto &object : game_world->game_objects) {
+        if (object->IsDestroyed()) continue;
         int type = object->IsAlliance();
         if (type == 1) {
             double distance = (*this) ^ (*object);
@@ -336,9 +342,7 @@ bool SpaceShip::CheckCollision() {
         }
     }
     if (IsDestroyed()) {
-        game_world->game_objects.push_back(new Explosion(GetX(), GetY()));
         DeathEvent();
-        player->IncreaseDestroyedEnemy();
         return true;
     }
     return false;
@@ -354,7 +358,7 @@ void SpaceShip::Move() {
         SetStrategyLength(randInt(10, 50));
     }
     if (GetX() >= WINDOW_WIDTH) {
-        SetStrategy(StrategyDirection::RIGHTDOWN);
+        SetStrategy(StrategyDirection::LEFTDOWN);
         SetStrategyLength(randInt(10, 50));
     }
     SetStrategyLength(GetStrategyLength() - 1);
@@ -369,7 +373,7 @@ void SpaceShip::Move() {
 
 void SpaceShip::Update() {
     CHECK_IS_DESTROYED;
-    Y_EXCEED_DESTROY;
+    SPACESHIP_EXCEED_DESTROY;
     CRASH_SKIP;
     TryAttack();
     EngeryRegeneration();
@@ -475,7 +479,10 @@ void Alphatron::TryAttack() {
 }
 
 void Alphatron::DeathEvent() {
+    game_world->game_objects.push_back(new Explosion(GetX(), GetY()));
     game_world->IncreaseScore(50);
+    game_world->player->IncreaseDestroyedEnemy();
+    game_world->DecreaseCurrentEnemyNum();
 }
 
 Sigmatron::Sigmatron(int x, int y, int health_points, GameWorld *game_world, int _speed) : SpaceShip(IMGID_SIGMATRON, x, y, health_points, game_world, 0, 0, _speed, 0) {
@@ -491,9 +498,14 @@ void Sigmatron::TryAttack() {
 }
 
 void Sigmatron::DeathEvent() {
+    game_world->game_objects.push_back(new Explosion(GetX(), GetY()));
+    game_world->player->IncreaseDestroyedEnemy();
     game_world->IncreaseScore(100);
+    game_world->DecreaseCurrentEnemyNum();
+
     if (randInt(1, 100) > 20) return ;
     game_world->game_objects.push_back(new HPRestoreGoodie(GetX(), GetY(), game_world));
+
 }
 
 Omegatron::Omegatron(int x, int y, int health_points, GameWorld *game_world, int damage, int _speed) : SpaceShip(IMGID_OMEGATRON, x, y, health_points, game_world, damage, 50, _speed, 50) {
@@ -508,8 +520,13 @@ void Omegatron::TryAttack() {
 }
 
 void Omegatron::DeathEvent() {
+    game_world->game_objects.push_back(new Explosion(GetX(), GetY()));
+    game_world->player->IncreaseDestroyedEnemy();
     game_world->IncreaseScore(200);
+    game_world->DecreaseCurrentEnemyNum();
+
     if (randInt(1, 100) > 40) return ;
+
     int R = randInt(1, 100);
     Goodie* new_goodie;
     if (R <= 40) {

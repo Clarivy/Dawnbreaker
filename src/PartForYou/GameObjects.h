@@ -136,8 +136,6 @@ public:
 
     virtual bool CheckCollision() override { return false; }
 
-    int GetLives() const;
-
     int GetMeteorsNumber() const;
 
     int GetLevel() const;
@@ -156,13 +154,10 @@ public:
 
     void IncreaseLevel();
 
-    void DecreaseLives();
-
     void IncreaseDestroyedEnemy();
 
 private:
 
-    int lives;
     int meteors_number;
     int level;
     int energy;

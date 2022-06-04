@@ -11,7 +11,7 @@
 static const std::string ASSET_DIR = std::filesystem::current_path().string()
     .substr(0, std::filesystem::current_path().string().find_last_of('/')) + "/assets/";
 #else
-static const std::string ASSET_DIR = "../assets/";
+static const std::string ASSET_DIR = "D:\\program\\CS100\\final\\assets\\";
 #endif
 
 enum class LevelStatus {
