@@ -28,6 +28,13 @@ GameObject::GameObject(int imageID, int x, int y, int direction, int layer, doub
     this->health_points = health;
 }
 
+double GameObject::operator ^ (const GameObject &other) const {
+    double distance_2 = (GetX() - other.GetX()) * (GetX() - other.GetX()) + (GetY() - other.GetY()) * (GetY() - other.GetY());
+    double size_sum = GetSize() + other.GetSize();
+    double size_2 = size_sum * size_sum;
+    return size_2 * 900 - distance_2;
+}
+
 bool GameObject::IsDestroyed() const {
     return health_points == 0;
 }
@@ -36,7 +43,7 @@ int GameObject::IsEnemy() const {
     return false;
 }
 
-bool GameObject::IsAlliance() const {
+int GameObject::IsAlliance() const {
     return false;
 }
 
@@ -94,10 +101,6 @@ int PhysicalObject::GetDamage() const {
     return damage;
 }
 
-bool Alliance::IsAlliance() const {
-    return true;
-}
-
 Goodie::Goodie(int imageID, int x, int y, GameWorld *game_world) : PhysicalObject(imageID, x, y, 0, 2, 0.5, 1, game_world, 0) {
 }
 
@@ -105,23 +108,27 @@ void Goodie::Update() {
     CHECK_IS_DESTROYED;
     Y_EXCEED_DESTROY;
 
-    CollisionCheck();
+    CRASH_SKIP;
 
     MoveTo(GetX(), GetY() - 2);
 
-    CollisionCheck();
+    CRASH_SKIP;
 }
 
+bool Goodie::CollisionCheck() {
+    Dawnbreaker *player = game_world->player;
 
-int Goodie::GetReward() const {
-    return 20;
+    double distance = (*this) ^ (*player);
+    if (distance <= 0) return false;
+
+    CollisionEvent();
+
+    game_world->IncreaseScore(20);
+    SetDestroyed();
+
 }
 
-int Enemy::IsEnemy() const {
-    return true;
-}
-
-Dawnbreaker::Dawnbreaker(GameWorld * game_world) : Alliance(IMGID_DAWNBREAKER, 300, 100, 0, 0, 1.0, 100, game_world, 0) {
+Dawnbreaker::Dawnbreaker(GameWorld * game_world) : PhysicalObject(IMGID_DAWNBREAKER, 300, 100, 0, 0, 1.0, 100, game_world, 0) {
     lives = 3;
     meteors_number = 0;
     level = 0;
@@ -166,14 +173,37 @@ void Dawnbreaker::IncreaseDestroyedEnemy() {
     ++destroyed_enemy;
 }
 
+bool Alliance::CollisionCheck() {
+    for (auto &object : game_world->game_objects) {
+        if (object->IsEnemy() == 2) {
+            double distance = (*this) ^ (*object);
+            if(distance > 0) {
+                CollisionEvent(object);
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 BlueBullet::BlueBullet(int x, int y, double size, GameWorld * game_world, int damage) : Alliance(IMGID_BLUE_BULLET, x, y, 0, 1, size, 1, game_world, damage) {
+}
+
+void BlueBullet::CollisionEvent(GameObject *object) {
+    object->SetHealthPoints(object->GetHealthPoints() - GetDamage());
+
+    if (object->IsDestroyed()) {
+        object->DeathEvent();
+    }
+
+    SetDestroyed();
 }
 
 void BlueBullet::Update() {
     CHECK_IS_DESTROYED;
     Y_EXCEED_DESTROY;
 
-    CHECK_CRASH;
+    CollisionCheck();
     
     MoveTo(GetX(), GetY() + 6);
 }
@@ -185,10 +215,17 @@ void Meteor::Update() {
     CHECK_IS_DESTROYED;
     Y_EXCEED_DESTROY;
 
-    CHECK_CRASH;
+    CheckCollision();
 
     MoveTo(GetX(), GetY() + 2);
     SetDirection(GetDirection() + 5);
+
+    CheckCollision();
+}
+
+void Meteor::CollisionEvent(GameObject *object) {
+    object->SetDestroyed();
+    object->DeathEvent();
 }
 
 RedBullet::RedBullet(int x, int y, int direction, GameWorld *game_world, int damage) : Enemy(IMGID_RED_BULLET, x, y, direction, 1, 0.5, 1, game_world, damage) {
@@ -197,8 +234,7 @@ RedBullet::RedBullet(int x, int y, int direction, GameWorld *game_world, int dam
 void RedBullet::Update() {
     CHECK_IS_DESTROYED;
     Y_EXCEED_DESTROY;
-
-    CHECK_CRASH;
+    CRASH_SKIP;
 
     if (GetDirection() == 180) {
         MoveTo(GetX(), GetY() - 6);
@@ -208,7 +244,18 @@ void RedBullet::Update() {
         MoveTo(GetX() - 2, GetY() - 6);
     }
 
-    CHECK_CRASH;
+    CRASH_SKIP;
+}
+
+bool RedBullet::CollisionCheck() {
+    Dawnbreaker *player = game_world->player;
+    double distance = (*this) ^ (*player);
+    if(distance > 0) {
+        player->SetHealthPoints(player->GetHealthPoints() - GetDamage());
+        this->SetDestroyed();
+        return true;
+    }
+    return false;
 }
 
 SpaceShip::SpaceShip(int imageID, int x, int y, int health_points, GameWorld *game_world, int damage, int _energy, int _speed, int _energy_limit) : Enemy (imageID, x, y, 180, 0, 1.0, health_points, game_world, damage) {
@@ -225,10 +272,6 @@ SpaceShip::SpaceShip(int imageID, int x, int y, int health_points, GameWorld *ga
     speed = _speed;
 }
 
-int SpaceShip::IsEnemy() const {
-    return 2;
-}
-
 void SpaceShip::EngeryRegeneration() {
     if (GetEnergy() < energy_limit) {
         SetEnergy(GetEnergy() + 1);
@@ -236,7 +279,36 @@ void SpaceShip::EngeryRegeneration() {
 }
 
 bool SpaceShip::CollisionCheck() {
-    CHECK_CRASH;
+    Dawnbreaker *player = game_world->player;
+    double distance = (*this) ^ (*player);
+    if(distance > 0) {
+        player->SetHealthPoints(player->GetHealthPoints() - 20);
+        this->SetDestroyed();
+        return true;
+    }
+    for (auto &object : game_world->game_objects) {
+        int type = object->IsAlliance();
+        if (type == 1) {
+            double distance = (*this) ^ (*object);
+            if(distance > 0) {
+                SetHealthPoints(GetHealthPoints() - object->GetDamage());
+                object->SetDestroyed();
+                break;
+            }
+        }
+        else if (type == 2) {
+            double distance = (*this) ^ (*object);
+            if(distance > 0) {
+                SetDestroyed();
+                break;
+            }
+        }
+    }
+    if (IsDestroyed()) {
+        DeathEvent();
+        return true;
+    }
+    return false;
 }
 
 void SpaceShip::Move() {
@@ -319,11 +391,24 @@ void SpaceShip::SetSpeed(int x) {
 HPRestoreGoodie::HPRestoreGoodie(int x, int y, GameWorld *game_world) : Goodie(IMGID_HP_RESTORE_GOODIE, x, y, game_world) {
 }
 
+void HPRestoreGoodie::CollisionEvent() {
+    Dawnbreaker *player = game_world->player;
+    player->SetHealthPoints(player->GetHealthPoints() + 50);
+    if (player->GetHealthPoints() > 100) {
+        player->SetHealthPoints(100);
+    }
+}
+
 int HPRestoreGoodie::IsGoodie() const {
     return 1;
 }
 
 PowerUpGoodie::PowerUpGoodie(int x, int y, GameWorld *game_world) : Goodie(IMGID_POWERUP_GOODIE, x, y, game_world) {
+}
+
+void PowerUpGoodie::CollisionEvent() {
+    Dawnbreaker *player = game_world->player;
+    player->IncreaseLevel();
 }
 
 int PowerUpGoodie::IsGoodie() const {
@@ -335,6 +420,11 @@ MeteorGoodie::MeteorGoodie(int x, int y, GameWorld *game_world) : Goodie(IMGID_M
 
 int MeteorGoodie::IsGoodie() const {
     return 3;
+}
+
+void MeteorGoodie::CollisionEvent() {
+    Dawnbreaker *player = game_world->player;
+    player->IncreaseMeteorsNumber();
 }
 
 

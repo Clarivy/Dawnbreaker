@@ -25,9 +25,17 @@ public:
 
     int GetHealthPoints() const;
 
+    virtual void DeathEvent() { }
+
+    virtual void CollisionEvent(GameObject *object) { }
+
+    virtual bool CheckTarget(GameObject *object) { }
+
+    virtual int GetDamage() const { return 0; }
+
     virtual int IsEnemy() const;
 
-    virtual bool IsAlliance() const;
+    virtual int IsAlliance() const;
 
     virtual int IsGoodie() const;
 
@@ -35,9 +43,12 @@ public:
 
     void SetDestroyed();
 
+    double operator ^(const GameObject &other) const;
+
 protected:
 
     virtual int CheckCollision() const;
+
 
 
 private:
@@ -73,7 +84,7 @@ public:
 
     virtual bool CollisionCheck() = 0;
 
-    int GetDamage() const;
+    virtual int GetDamage() const;
 
 protected:
 
@@ -88,7 +99,9 @@ public:
 
     using PhysicalObject::PhysicalObject;
 
-    virtual bool IsAlliance() const override;
+    virtual bool CollisionCheck() override;
+
+    virtual void CollisionEvent(GameObject *object) = 0;
 
 };
 
@@ -100,7 +113,11 @@ public:
 
     virtual void Update() override;
 
-    int GetReward() const;
+    virtual bool CollisionCheck() override;
+
+    virtual void CollisionEvent() = 0;
+
+    int GetReward() const { return 20; }
 
 };
 
@@ -110,11 +127,9 @@ public:
 
     using PhysicalObject::PhysicalObject;
 
-    virtual int IsEnemy() const override;
-
 };
 
-class Dawnbreaker: public Alliance {
+class Dawnbreaker: public PhysicalObject {
 
 public:
 
@@ -122,7 +137,7 @@ public:
 
     virtual void Update() override;
 
-    virtual bool CollisionCheck() override;
+    virtual bool CollisionCheck() override { return false; }
 
     int GetLives() const;
 
@@ -157,7 +172,9 @@ public:
 
     BlueBullet(int x, int y, double size, GameWorld *game_world, int damage);
 
-    virtual bool CollisionCheck() override;
+    virtual int IsAlliance() const override { return 1; }
+
+    virtual void CollisionEvent(GameObject *object) override;
 
     virtual void Update() override;
 
@@ -171,7 +188,9 @@ public:
 
     virtual void Update() override;
 
-    virtual bool CollisionCheck() override;
+    virtual int IsAlliance() const override { return 2; }
+
+    virtual void CollisionEvent(GameObject *object) override;
 
 };
 
@@ -184,6 +203,8 @@ public:
     virtual bool CollisionCheck() override;
 
     virtual void Update() override;
+
+    virtual int IsEnemy() const override { return 1; }
 
 };
 
@@ -199,11 +220,13 @@ protected:
 
     virtual void TryAttack() = 0;
 
-    virtual int IsEnemy() const override;
-
-    void EngeryRegeneration();
+    virtual void DeathEvent() = 0;
 
     virtual bool CollisionCheck() override;
+
+    virtual int IsEnemy() const override { return 2; }
+
+    void EngeryRegeneration();
 
     virtual void Update() override;
 
@@ -240,7 +263,7 @@ public:
 
     HPRestoreGoodie(int x, int y, GameWorld *game_world);
 
-    virtual bool CollisionCheck() override;
+    virtual void CollisionEvent() override;
 
     virtual int IsGoodie() const override;
 
@@ -252,7 +275,7 @@ public:
 
     PowerUpGoodie(int x, int y, GameWorld *game_world);
 
-    virtual bool CollisionCheck() override;
+    virtual void CollisionEvent() override;
 
     virtual int IsGoodie() const override;
 
@@ -264,7 +287,7 @@ public:
 
     MeteorGoodie(int x, int y, GameWorld *game_world);
 
-    virtual bool CollisionCheck() override;
+    virtual void CollisionEvent() override;
 
     virtual int IsGoodie() const override;
 
@@ -278,6 +301,7 @@ public:
 
     virtual void TryAttack() override;
 
+    virtual void DeathEvent() override;
 };
 
 class Sigmatron: public SpaceShip {
@@ -287,6 +311,8 @@ public:
     Sigmatron(int x, int y, int health_points, GameWorld *game_world, int _speed);
 
     virtual void TryAttack() override;
+
+    virtual void DeathEvent() override;
 };
 
 
@@ -297,6 +323,8 @@ public:
     Omegatron(int x, int y, int health_points, GameWorld *game_world, int damage, int _speed);
 
     virtual void TryAttack() override;
+
+    virtual void DeathEvent() override;
 };
 
 #endif // GAMEOBJECTS_H__
