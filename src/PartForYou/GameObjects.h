@@ -70,6 +70,8 @@ public:
 
 class Explosion : public GameObject {
 
+public:
+
     Explosion(int x, int y);
 
     virtual void Update() override;

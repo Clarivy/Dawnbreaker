@@ -305,7 +305,9 @@ bool SpaceShip::CollisionCheck() {
         }
     }
     if (IsDestroyed()) {
+        game_world->game_objects.push_back(new Explosion(GetX(), GetY()));
         DeathEvent();
+        player->IncreaseDestroyedEnemy();
         return true;
     }
     return false;
@@ -432,19 +434,59 @@ Alphatron::Alphatron(int x, int y, int health_points, GameWorld *game_world, int
 }
 
 void Alphatron::TryAttack() {
-    TRY_ATTACK;
+    Dawnbreaker *player = game_world->player;
+    double distance_x = std::abs(GetX() - player->GetX());
+    if (distance_x > 10) return ;
+    if (GetEnergy() < 25) return ;
+    if (randInt(1, 100) > 25) return ;
+    SetEnergy(GetEnergy() - 25);
+    game_world->game_objects.push_back(new RedBullet(GetX(), GetY() - 50, 180, game_world, GetDamage()));
+}
+
+void Alphatron::DeathEvent() {
+    game_world->IncreaseScore(50);
 }
 
 Sigmatron::Sigmatron(int x, int y, int health_points, GameWorld *game_world, int _speed) : SpaceShip(IMGID_SIGMATRON, x, y, health_points, game_world, 0, 0, _speed, 0) {
 }
 
 void Sigmatron::TryAttack() {
-    TRY_ATTACK;
+    Dawnbreaker *player = game_world->player;
+    double distance_x = std::abs(GetX() - player->GetX());
+    if (distance_x > 10) return ;
+    SetStrategy(StrategyDirection::STRAIGHT);
+    SetStrategyLength(WINDOW_HEIGHT);
+    SetSpeed(10);
+}
+
+void Alphatron::DeathEvent() {
+    game_world->IncreaseScore(100);
+    if (randInt(1, 100) > 20) return ;
+    game_world->game_objects.push_back(new HPRestoreGoodie(GetX(), GetY(), game_world));
 }
 
 Sigmatron::Sigmatron(int x, int y, int health_points, GameWorld *game_world, int _speed) : SpaceShip(IMGID_OMEGATRON, x, y, health_points, game_world, damage, 50, _speed, 50) {
 }
 
 void Sigmatron::TryAttack() {
-    TRY_ATTACK;
+    Dawnbreaker *player = game_world->player;
+    if (GetEnergy() < 50) return ;
+    SetEnergy(GetEnergy() - 50);
+    game_world->game_objects.push_back(new RedBullet(GetX(), GetY() - 50, 162, game_world, GetDamage()));
+    game_world->game_objects.push_back(new RedBullet(GetX(), GetY() - 50, 198, game_world, GetDamage()));
+}
+
+void Sigmatron::DeathEvent() {
+    game_world->IncreaseScore(200);
+    if (randInt(1, 100) > 40) return ;
+    int R = randInt(1, 100);
+    Goodie* new_goodie;
+    if (R <= 40) {
+        new_goodie = new HPRestoreGoodie(GetX(), GetY(), game_world);
+    }
+    else {
+        new_goodie = new PowerUpGoodie(GetX(), GetY(), game_world);
+    }
+    game_world->game_objects.push_back(new_goodie);
+
 }
