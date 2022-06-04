@@ -17,7 +17,7 @@ public:
 
     GameObject(int imageID, int x, int y, int direction, int layer, double size, int health);
 
-    virtual ~GameObject();
+    virtual ~GameObject() { }
 
     bool IsDestroyed() const;
 
@@ -43,8 +43,7 @@ public:
 
 protected:
 
-    virtual int CheckCollision() const;
-
+    virtual bool CheckCollision() const { return false; }
 
 
 private:
@@ -80,7 +79,7 @@ public:
 
     PhysicalObject(int imageID, int x, int y, int direction, int layer, double size, int health, GameWorld *_game_world, int _damage);
 
-    virtual bool CollisionCheck() = 0;
+    virtual bool CheckCollision() = 0;
 
     virtual int GetDamage() const;
 
@@ -97,7 +96,7 @@ public:
 
     using PhysicalObject::PhysicalObject;
 
-    virtual bool CollisionCheck() override;
+    virtual bool CheckCollision() override;
 
     virtual void CollisionEvent(GameObject *object) = 0;
 
@@ -111,7 +110,7 @@ public:
 
     virtual void Update() override;
 
-    virtual bool CollisionCheck() override;
+    virtual bool CheckCollision() override;
 
     virtual void CollisionEvent() = 0;
 
@@ -135,7 +134,7 @@ public:
 
     virtual void Update() override;
 
-    virtual bool CollisionCheck() override { return false; }
+    virtual bool CheckCollision() override { return false; }
 
     int GetLives() const;
 
@@ -143,11 +142,17 @@ public:
 
     int GetLevel() const;
 
+    int GetEnergy() const { return energy; }
+
     int GetDestroyedEnemy() const;
 
     void IncreaseEnergy();
 
+    void SetEnergy(int x) { energy = x; }
+
     void IncreaseMeteorsNumber();
+
+    void DecreaseMeteorsNumber() { --meteors_number; }
 
     void IncreaseLevel();
 
@@ -198,7 +203,7 @@ public:
 
     RedBullet(int x, int y, int direction, GameWorld *game_world, int damage);
 
-    virtual bool CollisionCheck() override;
+    virtual bool CheckCollision() override;
 
     virtual void Update() override;
 
@@ -220,7 +225,7 @@ protected:
 
     virtual void DeathEvent() = 0;
 
-    virtual bool CollisionCheck() override;
+    virtual bool CheckCollision() override;
 
     virtual int IsEnemy() const override { return 2; }
 

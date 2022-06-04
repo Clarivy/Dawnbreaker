@@ -110,7 +110,7 @@ void Goodie::Update() {
     CRASH_SKIP;
 }
 
-bool Goodie::CollisionCheck() {
+bool Goodie::CheckCollision() {
     Dawnbreaker *player = game_world->player;
 
     double distance = (*this) ^ (*player);
@@ -129,6 +129,42 @@ Dawnbreaker::Dawnbreaker(GameWorld * game_world) : PhysicalObject(IMGID_DAWNBREA
     level = 0;
     energy = 10;
 }
+
+#define TRY_MOVE(DIR, a, b) { \
+    if (game_world->GetKey(KeyCode::DIR)) {\
+        x += a; y += b;\
+        if (!(x < 0 || x >= WINDOW_WIDTH || y < 50 || y >= WINDOW_HEIGHT)) {\
+            MoveTo(x, y);\
+        }\
+    }\
+}
+
+void Dawnbreaker::Update() {
+    CHECK_IS_DESTROYED;
+    int x = GetX();
+    int y = GetY();
+    TRY_MOVE(UP, 0, 4);
+    TRY_MOVE(DOWN, 0, -4);
+    TRY_MOVE(LEFT, -4, 0);
+    TRY_MOVE(RIGHT, 4, 0);
+    if (game_world->GetKey(KeyCode::FIRE1)) {
+        if (GetEnergy() >= 10) {
+            SetEnergy(GetEnergy() - 10);
+            double bullet_size = 0.5 + 0.1 * GetLevel();
+            int bullet_damage = 5 + 3 * GetLevel();
+            game_world->game_objects.push_back(new BlueBullet(GetX(), GetY() + 50, bullet_size, game_world, bullet_damage));
+        }
+    }
+    if (game_world->GetKeyDown(KeyCode::FIRE2)) {
+        if (GetMeteorsNumber() >= 1) {
+            DecreaseMeteorsNumber();
+            game_world->game_objects.push_back(new Meteor(GetX(), GetY() + 100, game_world));
+        }
+    }
+    IncreaseEnergy();
+}
+
+#undef TRY_MOVE
 
 int Dawnbreaker::GetLives() const {
     return lives;
@@ -168,7 +204,7 @@ void Dawnbreaker::IncreaseDestroyedEnemy() {
     ++destroyed_enemy;
 }
 
-bool Alliance::CollisionCheck() {
+bool Alliance::CheckCollision() {
     for (auto &object : game_world->game_objects) {
         if (object->IsEnemy() == 2) {
             double distance = (*this) ^ (*object);
@@ -198,7 +234,7 @@ void BlueBullet::Update() {
     CHECK_IS_DESTROYED;
     Y_EXCEED_DESTROY;
 
-    CollisionCheck();
+    CheckCollision();
     
     MoveTo(GetX(), GetY() + 6);
 }
@@ -242,7 +278,7 @@ void RedBullet::Update() {
     CRASH_SKIP;
 }
 
-bool RedBullet::CollisionCheck() {
+bool RedBullet::CheckCollision() {
     Dawnbreaker *player = game_world->player;
     double distance = (*this) ^ (*player);
     if(distance > 0) {
@@ -273,7 +309,7 @@ void SpaceShip::EngeryRegeneration() {
     }
 }
 
-bool SpaceShip::CollisionCheck() {
+bool SpaceShip::CheckCollision() {
     Dawnbreaker *player = game_world->player;
     double distance = (*this) ^ (*player);
     if(distance > 0) {
