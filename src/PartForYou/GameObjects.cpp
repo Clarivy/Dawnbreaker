@@ -1,10 +1,5 @@
-#ifndef GAMEOBJECTS_H__
 #include "GameObjects.h"
-#endif
-
-#ifndef UTILS_H__
 #include "utils.h"
-#endif
 
 #define Y_EXCEED_DESTROY { \
     if (GetY() < 0 || GetY() >= WINDOW_HEIGHT) {\
@@ -125,7 +120,7 @@ bool Goodie::CollisionCheck() {
 
     game_world->IncreaseScore(20);
     SetDestroyed();
-
+    return true;
 }
 
 Dawnbreaker::Dawnbreaker(GameWorld * game_world) : PhysicalObject(IMGID_DAWNBREAKER, 300, 100, 0, 0, 1.0, 100, game_world, 0) {
@@ -459,16 +454,16 @@ void Sigmatron::TryAttack() {
     SetSpeed(10);
 }
 
-void Alphatron::DeathEvent() {
+void Sigmatron::DeathEvent() {
     game_world->IncreaseScore(100);
     if (randInt(1, 100) > 20) return ;
     game_world->game_objects.push_back(new HPRestoreGoodie(GetX(), GetY(), game_world));
 }
 
-Sigmatron::Sigmatron(int x, int y, int health_points, GameWorld *game_world, int _speed) : SpaceShip(IMGID_OMEGATRON, x, y, health_points, game_world, damage, 50, _speed, 50) {
+Omegatron::Omegatron(int x, int y, int health_points, GameWorld *game_world, int damage, int _speed) : SpaceShip(IMGID_OMEGATRON, x, y, health_points, game_world, damage, 50, _speed, 50) {
 }
 
-void Sigmatron::TryAttack() {
+void Omegatron::TryAttack() {
     Dawnbreaker *player = game_world->player;
     if (GetEnergy() < 50) return ;
     SetEnergy(GetEnergy() - 50);
@@ -476,7 +471,7 @@ void Sigmatron::TryAttack() {
     game_world->game_objects.push_back(new RedBullet(GetX(), GetY() - 50, 198, game_world, GetDamage()));
 }
 
-void Sigmatron::DeathEvent() {
+void Omegatron::DeathEvent() {
     game_world->IncreaseScore(200);
     if (randInt(1, 100) > 40) return ;
     int R = randInt(1, 100);

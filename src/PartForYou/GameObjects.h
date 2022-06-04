@@ -1,9 +1,7 @@
 #ifndef GAMEOBJECTS_H__
 #define GAMEOBJECTS_H__
 
-#ifndef GAMEWORLD_H__
 #include "GameWorld.h"
-#endif
 
 #include "ObjectBase.h"
 
@@ -28,8 +26,6 @@ public:
     virtual void DeathEvent() { }
 
     virtual void CollisionEvent(GameObject *object) { }
-
-    virtual bool CheckTarget(GameObject *object) { }
 
     virtual int GetDamage() const { return 0; }
 

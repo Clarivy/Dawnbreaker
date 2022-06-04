@@ -1,8 +1,6 @@
 #include "GameWorld.h"
-
-#ifndef UTILS_H__
+#include "GameObjects.h"
 #include "utils.h"
-#endif
 
 GameWorld::GameWorld() {
 }
@@ -89,6 +87,7 @@ LevelStatus GameWorld::Update() {
     }
     // HP: X/100 Meteors: X Lives: X Level: X Enemies: X/X Score: X
     std::cout << "HP: " << player->GetHealthPoints() << "/100   Meteors: " << player->GetMeteorsNumber() << "   Lives: " << player->GetLives() << "   Level: " << GetLevel() << "   Enemies: " << player->GetDestroyedEnemy() << "/" << required << "   Score: " << GetScore() << std::endl;
+    return LevelStatus::ONGOING;
 }
 
 void GameWorld::CleanUp() {
