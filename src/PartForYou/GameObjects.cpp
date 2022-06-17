@@ -145,6 +145,9 @@ Dawnbreaker::Dawnbreaker(GameWorld * game_world) : PhysicalObject(IMGID_DAWNBREA
         if (!(x < 0 || x >= WINDOW_WIDTH || y < 50 || y >= WINDOW_HEIGHT)) {\
             MoveTo(x, y);\
         }\
+        else {\
+            x -= a; y -= b;\
+        }\
     }\
 }
 
