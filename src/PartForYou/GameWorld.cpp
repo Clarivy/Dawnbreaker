@@ -2,6 +2,7 @@
 #include "GameObjects.h"
 #include "utils.h"
 #include <sstream>
+// #define __CHEAT_MODE__
 
 GameWorld::GameWorld() {
     current_enemy_num = 0;
@@ -70,8 +71,12 @@ LevelStatus GameWorld::Update() {
     }
 
     if (player->IsDestroyed()) {
+#ifdef __CHEAT_MODE__
+        player->SetHealthPoints(100);
+#else
         DecreaseLives();
         return LevelStatus::DAWNBREAKER_DESTROYED;
+#endif
     }
 
     if (destroyed == required) {
