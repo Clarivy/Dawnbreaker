@@ -155,6 +155,11 @@
     <CustomBuild Include="D:\program\CS100\final\third_party\freeglut\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="D:\program\CS100\final\build\freeglutdll.def">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
     <ResourceCompile Include="D:\program\CS100\final\build\freeglut.rc">
       <Filter>Source Files</Filter>
     </ResourceCompile>

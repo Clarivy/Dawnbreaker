@@ -1,51 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
-  </PropertyGroup>
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Debug|x64">
+    <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
-      <Platform>x64</Platform>
+      <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|x64">
+    <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
-      <Platform>x64</Platform>
+      <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="MinSizeRel|x64">
+    <ProjectConfiguration Include="MinSizeRel|Win32">
       <Configuration>MinSizeRel</Configuration>
-      <Platform>x64</Platform>
+      <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="RelWithDebInfo|x64">
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
       <Configuration>RelWithDebInfo</Configuration>
-      <Platform>x64</Platform>
+      <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{EB4D76B2-E8F5-353D-9580-8E61B1FF3514}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
-    <Platform>x64</Platform>
+    <Platform>Win32</Platform>
     <ProjectName>freeglut_static</ProjectName>
     <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
@@ -59,24 +56,24 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\program\CS100\final\build\lib\Debug\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">freeglut_static.dir\Debug\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">freeglut_static</TargetName>
-    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\program\CS100\final\build\lib\Release\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">freeglut_static.dir\Release\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">freeglut_static</TargetName>
-    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\program\CS100\final\build\lib\MinSizeRel\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">freeglut_static.dir\MinSizeRel\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">freeglut_static</TargetName>
-    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\program\CS100\final\build\lib\RelWithDebInfo\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">freeglut_static.dir\RelWithDebInfo\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">freeglut_static</TargetName>
-    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\program\CS100\final\build\lib\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">freeglut_static.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">freeglut_static</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">D:\program\CS100\final\build\lib\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">freeglut_static.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">freeglut_static</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">D:\program\CS100\final\build\lib\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">freeglut_static.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">freeglut_static</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">D:\program\CS100\final\build\lib\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">freeglut_static.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">freeglut_static</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.lib</TargetExt>
   </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <AdditionalIncludeDirectories>D:\program\CS100\final\third_party\freeglut\src;D:\program\CS100\final\third_party\freeglut\include;D:\program\CS100\final\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
@@ -105,10 +102,10 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Lib>
-      <AdditionalOptions>%(AdditionalOptions) /machine:x64 /machine:x64</AdditionalOptions>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
     </Lib>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <AdditionalIncludeDirectories>D:\program\CS100\final\third_party\freeglut\src;D:\program\CS100\final\third_party\freeglut\include;D:\program\CS100\final\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
@@ -137,10 +134,10 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Lib>
-      <AdditionalOptions>%(AdditionalOptions) /machine:x64 /machine:x64</AdditionalOptions>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
     </Lib>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
     <ClCompile>
       <AdditionalIncludeDirectories>D:\program\CS100\final\third_party\freeglut\src;D:\program\CS100\final\third_party\freeglut\include;D:\program\CS100\final\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
@@ -169,10 +166,10 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Lib>
-      <AdditionalOptions>%(AdditionalOptions) /machine:x64 /machine:x64</AdditionalOptions>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
     </Lib>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
     <ClCompile>
       <AdditionalIncludeDirectories>D:\program\CS100\final\third_party\freeglut\src;D:\program\CS100\final\third_party\freeglut\include;D:\program\CS100\final\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
@@ -200,13 +197,13 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Lib>
-      <AdditionalOptions>%(AdditionalOptions) /machine:x64 /machine:x64</AdditionalOptions>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <CustomBuild Include="D:\program\CS100\final\third_party\freeglut\CMakeLists.txt">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/program/CS100/final/third_party/freeglut/CMakeLists.txt</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule D:/program/CS100/final/third_party/freeglut/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 "D:\Program Files\CMake\bin\cmake.exe" -SD:/program/CS100/final -BD:/program/CS100/final/build --check-stamp-file D:/program/CS100/final/build/freeglut/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
@@ -215,11 +212,11 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Program Files\CMake\share\cmake-3.23\Modules\BasicConfigVersion-AnyNewerVersion.cmake.in;D:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CMakePackageConfigHelpers.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckCCompilerFlag.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckCSourceCompiles.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckFunctionExists.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckIncludeFile.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckIncludeFileCXX.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckIncludeFiles.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckTypeSize.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\FindOpenGL.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\FindPackageMessage.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\GNUInstallDirs.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\Internal\CheckCompilerFlag.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\Internal\CheckFlagCommonConfig.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\Internal\CheckSourceCompiles.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\WriteBasicConfigVersionFile.cmake;D:\program\CS100\final\third_party\freeglut\FreeGLUTConfig.cmake.in;D:\program\CS100\final\third_party\freeglut\config.h.in;D:\program\CS100\final\third_party\freeglut\freeglut.pc.in;D:\program\CS100\final\third_party\freeglut\freeglut.rc.in;D:\program\CS100\final\third_party\freeglut\src\fg_version.h.in;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\program\CS100\final\build\freeglut\CMakeFiles\generate.stamp</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/program/CS100/final/third_party/freeglut/CMakeLists.txt</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\Program Files\CMake\share\cmake-3.23\Modules\BasicConfigVersion-AnyNewerVersion.cmake.in;D:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CMakePackageConfigHelpers.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckCCompilerFlag.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckCSourceCompiles.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckFunctionExists.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckIncludeFile.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckIncludeFileCXX.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckIncludeFiles.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckTypeSize.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\FindOpenGL.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\FindPackageMessage.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\GNUInstallDirs.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\Internal\CheckCompilerFlag.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\Internal\CheckFlagCommonConfig.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\Internal\CheckSourceCompiles.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\WriteBasicConfigVersionFile.cmake;D:\program\CS100\final\third_party\freeglut\FreeGLUTConfig.cmake.in;D:\program\CS100\final\third_party\freeglut\config.h.in;D:\program\CS100\final\third_party\freeglut\freeglut.pc.in;D:\program\CS100\final\third_party\freeglut\freeglut.rc.in;D:\program\CS100\final\third_party\freeglut\src\fg_version.h.in;D:\program\CS100\final\third_party\freeglut\src\freeglutdll.def.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\program\CS100\final\build\freeglut\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule D:/program/CS100/final/third_party/freeglut/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 "D:\Program Files\CMake\bin\cmake.exe" -SD:/program/CS100/final -BD:/program/CS100/final/build --check-stamp-file D:/program/CS100/final/build/freeglut/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
@@ -228,11 +225,11 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Program Files\CMake\share\cmake-3.23\Modules\BasicConfigVersion-AnyNewerVersion.cmake.in;D:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CMakePackageConfigHelpers.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckCCompilerFlag.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckCSourceCompiles.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckFunctionExists.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckIncludeFile.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckIncludeFileCXX.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckIncludeFiles.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckTypeSize.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\FindOpenGL.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\FindPackageMessage.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\GNUInstallDirs.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\Internal\CheckCompilerFlag.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\Internal\CheckFlagCommonConfig.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\Internal\CheckSourceCompiles.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\WriteBasicConfigVersionFile.cmake;D:\program\CS100\final\third_party\freeglut\FreeGLUTConfig.cmake.in;D:\program\CS100\final\third_party\freeglut\config.h.in;D:\program\CS100\final\third_party\freeglut\freeglut.pc.in;D:\program\CS100\final\third_party\freeglut\freeglut.rc.in;D:\program\CS100\final\third_party\freeglut\src\fg_version.h.in;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\program\CS100\final\build\freeglut\CMakeFiles\generate.stamp</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/program/CS100/final/third_party/freeglut/CMakeLists.txt</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">D:\Program Files\CMake\share\cmake-3.23\Modules\BasicConfigVersion-AnyNewerVersion.cmake.in;D:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CMakePackageConfigHelpers.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckCCompilerFlag.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckCSourceCompiles.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckFunctionExists.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckIncludeFile.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckIncludeFileCXX.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckIncludeFiles.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckTypeSize.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\FindOpenGL.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\FindPackageMessage.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\GNUInstallDirs.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\Internal\CheckCompilerFlag.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\Internal\CheckFlagCommonConfig.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\Internal\CheckSourceCompiles.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\WriteBasicConfigVersionFile.cmake;D:\program\CS100\final\third_party\freeglut\FreeGLUTConfig.cmake.in;D:\program\CS100\final\third_party\freeglut\config.h.in;D:\program\CS100\final\third_party\freeglut\freeglut.pc.in;D:\program\CS100\final\third_party\freeglut\freeglut.rc.in;D:\program\CS100\final\third_party\freeglut\src\fg_version.h.in;D:\program\CS100\final\third_party\freeglut\src\freeglutdll.def.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">D:\program\CS100\final\build\freeglut\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule D:/program/CS100/final/third_party/freeglut/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
 "D:\Program Files\CMake\bin\cmake.exe" -SD:/program/CS100/final -BD:/program/CS100/final/build --check-stamp-file D:/program/CS100/final/build/freeglut/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
@@ -241,11 +238,11 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\Program Files\CMake\share\cmake-3.23\Modules\BasicConfigVersion-AnyNewerVersion.cmake.in;D:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CMakePackageConfigHelpers.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckCCompilerFlag.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckCSourceCompiles.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckFunctionExists.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckIncludeFile.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckIncludeFileCXX.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckIncludeFiles.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckTypeSize.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\FindOpenGL.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\FindPackageMessage.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\GNUInstallDirs.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\Internal\CheckCompilerFlag.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\Internal\CheckFlagCommonConfig.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\Internal\CheckSourceCompiles.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\WriteBasicConfigVersionFile.cmake;D:\program\CS100\final\third_party\freeglut\FreeGLUTConfig.cmake.in;D:\program\CS100\final\third_party\freeglut\config.h.in;D:\program\CS100\final\third_party\freeglut\freeglut.pc.in;D:\program\CS100\final\third_party\freeglut\freeglut.rc.in;D:\program\CS100\final\third_party\freeglut\src\fg_version.h.in;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\program\CS100\final\build\freeglut\CMakeFiles\generate.stamp</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/program/CS100/final/third_party/freeglut/CMakeLists.txt</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">D:\Program Files\CMake\share\cmake-3.23\Modules\BasicConfigVersion-AnyNewerVersion.cmake.in;D:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CMakePackageConfigHelpers.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckCCompilerFlag.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckCSourceCompiles.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckFunctionExists.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckIncludeFile.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckIncludeFileCXX.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckIncludeFiles.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckTypeSize.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\FindOpenGL.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\FindPackageMessage.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\GNUInstallDirs.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\Internal\CheckCompilerFlag.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\Internal\CheckFlagCommonConfig.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\Internal\CheckSourceCompiles.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\WriteBasicConfigVersionFile.cmake;D:\program\CS100\final\third_party\freeglut\FreeGLUTConfig.cmake.in;D:\program\CS100\final\third_party\freeglut\config.h.in;D:\program\CS100\final\third_party\freeglut\freeglut.pc.in;D:\program\CS100\final\third_party\freeglut\freeglut.rc.in;D:\program\CS100\final\third_party\freeglut\src\fg_version.h.in;D:\program\CS100\final\third_party\freeglut\src\freeglutdll.def.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">D:\program\CS100\final\build\freeglut\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule D:/program/CS100/final/third_party/freeglut/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
 "D:\Program Files\CMake\bin\cmake.exe" -SD:/program/CS100/final -BD:/program/CS100/final/build --check-stamp-file D:/program/CS100/final/build/freeglut/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
@@ -254,9 +251,9 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\Program Files\CMake\share\cmake-3.23\Modules\BasicConfigVersion-AnyNewerVersion.cmake.in;D:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CMakePackageConfigHelpers.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckCCompilerFlag.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckCSourceCompiles.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckFunctionExists.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckIncludeFile.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckIncludeFileCXX.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckIncludeFiles.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckTypeSize.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\FindOpenGL.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\FindPackageMessage.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\GNUInstallDirs.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\Internal\CheckCompilerFlag.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\Internal\CheckFlagCommonConfig.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\Internal\CheckSourceCompiles.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\WriteBasicConfigVersionFile.cmake;D:\program\CS100\final\third_party\freeglut\FreeGLUTConfig.cmake.in;D:\program\CS100\final\third_party\freeglut\config.h.in;D:\program\CS100\final\third_party\freeglut\freeglut.pc.in;D:\program\CS100\final\third_party\freeglut\freeglut.rc.in;D:\program\CS100\final\third_party\freeglut\src\fg_version.h.in;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\program\CS100\final\build\freeglut\CMakeFiles\generate.stamp</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">D:\Program Files\CMake\share\cmake-3.23\Modules\BasicConfigVersion-AnyNewerVersion.cmake.in;D:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CMakePackageConfigHelpers.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckCCompilerFlag.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckCSourceCompiles.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckFunctionExists.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckIncludeFile.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckIncludeFileCXX.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckIncludeFiles.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\CheckTypeSize.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\FindOpenGL.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\FindPackageMessage.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\GNUInstallDirs.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\Internal\CheckCompilerFlag.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\Internal\CheckFlagCommonConfig.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\Internal\CheckSourceCompiles.cmake;D:\Program Files\CMake\share\cmake-3.23\Modules\WriteBasicConfigVersionFile.cmake;D:\program\CS100\final\third_party\freeglut\FreeGLUTConfig.cmake.in;D:\program\CS100\final\third_party\freeglut\config.h.in;D:\program\CS100\final\third_party\freeglut\freeglut.pc.in;D:\program\CS100\final\third_party\freeglut\freeglut.rc.in;D:\program\CS100\final\third_party\freeglut\src\fg_version.h.in;D:\program\CS100\final\third_party\freeglut\src\freeglutdll.def.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">D:\program\CS100\final\build\freeglut\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -308,6 +305,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\program\CS100\final\third_party\freeglut\src\mswin\fg_structure_mswin.c" />
     <ClCompile Include="D:\program\CS100\final\third_party\freeglut\src\mswin\fg_window_mswin.c" />
     <ResourceCompile Include="D:\program\CS100\final\build\freeglut.rc" />
+    <None Include="D:\program\CS100\final\build\freeglutdll.def" />
     <ClCompile Include="D:\program\CS100\final\third_party\freeglut\src\util\xparsegeometry_repl.c" />
     <ClInclude Include="D:\program\CS100\final\third_party\freeglut\src\util\xparsegeometry_repl.h" />
   </ItemGroup>

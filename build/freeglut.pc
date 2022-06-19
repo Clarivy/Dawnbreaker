@@ -1,5 +1,5 @@
-prefix=C:/Program Files/Dawnbreaker
-libdir=C:/Program Files/Dawnbreaker/lib
+prefix=C:/Program Files (x86)/Dawnbreaker
+libdir=C:/Program Files (x86)/Dawnbreaker/lib
 includedir=${prefix}/include
 
 Name: glut
