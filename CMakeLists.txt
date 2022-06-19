@@ -103,6 +103,87 @@ target_include_directories(
   src/PartForYou/
 )
 
+add_library(
+  AA
+  STATIC
+  src/PartForYou/a.h
+  src/PartForYou/a.cpp
+)
+
+target_link_libraries(
+  AA
+  ProvidedFramework
+)
+
+target_include_directories(
+  AA
+  PUBLIC 
+  src/
+  src/ProvidedFramework/
+  src/PartForYou/
+)
+
+
+add_library(
+  BB
+  STATIC
+  src/PartForYou/b.h
+  src/PartForYou/b.cpp
+)
+
+target_link_libraries(
+  BB
+  ProvidedFramework
+)
+
+target_include_directories(
+  BB
+  PUBLIC 
+  src/
+  src/ProvidedFramework/
+  src/PartForYou/
+)
+
+add_library(
+  CC
+  STATIC
+  src/PartForYou/c.h
+  src/PartForYou/c.cpp
+)
+
+target_link_libraries(
+  CC
+  ProvidedFramework
+)
+
+target_include_directories(
+  CC
+  PUBLIC 
+  src/
+  src/ProvidedFramework/
+  src/PartForYou/
+)
+
+add_library(
+  DD
+  STATIC
+  src/PartForYou/d.h
+  src/PartForYou/d.cpp
+)
+
+target_link_libraries(
+  DD
+  ProvidedFramework
+)
+
+target_include_directories(
+  DD
+  PUBLIC 
+  src/
+  src/ProvidedFramework/
+  src/PartForYou/
+)
+
 add_executable(
   ${PROJECT_NAME}
   src/main.cpp
