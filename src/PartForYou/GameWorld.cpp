@@ -46,7 +46,7 @@ LevelStatus GameWorld::Update() {
     if (allowed > onScreen && randInt(1, 100) <= (allowed - onScreen)) {
         int P1 = 6;
         int P2 = 2 * std::max(level - 1, 0);
-        int P3 = 2 * std::max(level - 2, 0);
+        int P3 = 3 * std::max(level - 2, 0);
         int sum = P1 + P2 + P3;
         int R = randInt(1, sum);
         if (R <= P1) {
