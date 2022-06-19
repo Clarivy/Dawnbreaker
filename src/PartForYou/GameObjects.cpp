@@ -239,9 +239,11 @@ void BlueBullet::Update() {
     CHECK_IS_DESTROYED;
     Y_EXCEED_DESTROY;
 
-    CheckCollision();
+    CRASH_SKIP;
     
     MoveTo(GetX(), GetY() + 6);
+
+    CRASH_SKIP;
 }
 
 Meteor::Meteor(int x, int y, GameWorld *game_world) : Alliance(IMGID_METEOR, x, y, 0, 1, 2.0, 1, game_world, 0) {
